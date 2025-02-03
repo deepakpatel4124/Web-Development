@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<htm lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy New Year</title>
+    <link rel="stylesheet" href="{% static 'newyear/styles.css' %}">
+</head>
+
+<body>
+    {% if newyear %}
+        <h1>Happy New Year!</h1>
+    {% else %}
+        <h1>Not yet</h1>
+    {% endif %} 
+</body>
