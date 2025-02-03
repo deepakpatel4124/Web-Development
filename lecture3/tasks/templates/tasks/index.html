@@ -3,11 +3,27 @@
 {% block content %}
 
 <h1>Tasks</h1>
+
+{% if messages %}
+<h3>
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+</h3>
+{% endif %}
+
 <ul>
     {% for task in tasks %}
         <li>{{ task }}</li>
+    {% empty %}
+        <li>No tasks yet!</li>
     {% endfor %}
 </ul> 
 <a href="{% url 'tasks:add' %}">Add a New Task</a>
+
+<form action="{% url 'tasks:clear' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Clear Tasks</button>
+</form>
 
 {% endblock %}
