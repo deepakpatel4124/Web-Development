@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Addition</title>
+    <style>
+      #app {
+        text-align: center;
+        font-family: sans-serif;
+        margin: 5px;
+      }
+      #problem {
+        font-size: 60px;
+        margin: 5px;
+      }
+      .incorrect {
+        color: red;
+      }
+      #winner {
+        color: green;
+        font-size: 40px;
+      }
+      #losser {
+        color: red;
+        font-size: 40px;
+      }
+    </style>
+    <!-- Include React and ReactDOM -->
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- Include Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      function App() {
+
+        const [state, setState] = React.useState({
+            num1: 1,
+            num2: 2,
+            response:"",
+            score:0,
+            incorrect: false
+        });
+        function inputKeyPress(event) {
+            if (event.key === "Enter"){
+                const answer = parseInt(state.response);
+                if (state.num1 + state.num2 === answer){
+                    setState({
+                        ...state,
+                        incorrect: false,
+                        num1: Math.ceil(Math.random() * 10),
+                        num2: Math.ceil(Math.random() * 10),
+                        score: state.score + 1,
+                        response: ""
+                    });
+                } else {
+                    setState({
+                        ...state,
+                        incorrect: true,
+                        score: state.score - 1,
+                        response: ""
+                    });
+
+                }
+            }
+        }
+        function updateResponse (event) {
+            setState({
+                ...state,
+                response : event.target.value
+            });
+        }
+
+        if (state.score === -3){
+            return (
+                <div id="losser">
+                    <h1>Game Over</h1>
+                </div>
+            );
+        }
+        if (state.score === 10){
+            return (
+            <div id="winner">
+                <h1>Winner!!</h1>
+            </div>
+        );
+        }
+
+        return (
+            <div>
+                <div className = {state.incorrect ? "incorrect" : ""} id="problem">{state.num1}+{state.num2}</div>
+                <input onKeyPress = {inputKeyPress} onChange={updateResponse} value={state.response}></input>
+                <div>Score: {state.score}</div>
+
+            </div>
+
+        );
+      }
+
+      ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+  </body>
+</html>

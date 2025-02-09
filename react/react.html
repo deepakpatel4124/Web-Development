@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React</title>
+    <!-- Include React and ReactDOM -->
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- Include Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+      function Hello(props) {
+        return <h1>Hello, {props.name}</h1>;
+      }
+      function App() {
+        const name = "World";
+        let x = 10;
+        let y = 5;
+        return (
+          <div>
+            <Hello name="Deepak" />
+            <h2>
+              x:{x} y:{y}
+            </h2>
+            <h3>x+y = {x + y}</h3>
+          </div>
+        );
+      }
+      ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>
+  </body>
+</html>
