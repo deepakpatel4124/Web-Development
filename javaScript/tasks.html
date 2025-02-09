@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tasks</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('form').onsubmit = function() {
+                    const task = document.querySelector('#task').value;
+                    if (task === '') {
+                        alert('You must enter a task');
+                        return false;
+                    }
+                    const li = document.createElement('li');
+                    li.innerHTML = task;
+                    document.querySelector('#tasks').append(li);
+                    document.querySelector('#task').value = '';
+                    return false;
+                }
+
+                document.querySelector('#clear').onclick = function() {
+                document.querySelector('#tasks').innerHTML = '';
+            
+            }
+            });
+           
+
+        </script>
+    </head>
+
+    <body>
+        <h1>Tasks</h1>
+        <ul id="tasks">
+        </ul>
+        <form>
+            <input id="task" placeholder="New Task" type="text">
+            <input type="submit"> 
+        </form>
+        <button id="clear">Clear</button>
+</html>
